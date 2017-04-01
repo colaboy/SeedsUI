@@ -3,7 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
 	<title>exmobi-camera</title>
 	<link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
 	<style type="text/css">
@@ -20,13 +24,13 @@
 		<header>
 			<div class="titlebar">
 		        <a href="javascript:Exmobi.close()"><i class="icon icon-arrowleft"></i></a>
-		        <h1>照片选择</h1>
+		        <h1 class="titlebar-title">照片选择</h1>
 		    </div>
 		</header>
 		<article>
-			<a class="button block margin8" href="javascript:Exmobi.album()">调用系统相册</a>
-			<a class="button block margin8 info" href="javascript:Exmobi.imageChoice(500,5)">相册选择</a>
-			<a class="button block margin8 success" href="javascript:Exmobi.camera()">拍照上传</a>
+			<a class="button block" style="margin:8px;" href="javascript:Exmobi.album()">调用系统相册</a>
+			<a class="button block info" style="margin:8px;" href="javascript:Exmobi.imageChoice(500,5)">相册选择</a>
+			<a class="button block success" style="margin:8px;" href="javascript:Exmobi.camera()">拍照上传</a>
 			<p class="sliver">图片列表</p>
 			<ul id="imagelist" class="grid grid-radius8" data-col="3">
 				<li>

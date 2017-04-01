@@ -3,7 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
 	<title>grid-metro</title>
     <link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
     <style type="text/css">
@@ -48,6 +52,12 @@
 		padding:8px 0;
 		box-sizing:border-box;
 	}
+	.description{
+        color: #9e9e9e;
+        text-align: center;
+        height: 32px;
+        line-height: 32px;
+    }
     </style>
 </head>
 
@@ -55,11 +65,11 @@
 		<header>
 		    <div class="titlebar">
 		        <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-		        <h1>Grid栅格化</h1>
+		        <h1 class="titlebar-title">Grid栅格化</h1>
 		    </div>
 		</header>
 		<article>
-			<p class="sliver">Metro风格</p>
+			<p class="description">Metro风格</p>
 			<div class="app-metro">
 				<div class="app-metro-cell" style="width:60%;">
 					<a class="app-metro-cell-inner bg-1">
@@ -89,7 +99,7 @@
 				</div>
 			</div>
 
-			<p class="sliver">Metro风格-复杂布局</p>
+			<p class="description">Metro风格-复杂布局</p>
 			<div class="app-metro" style="height:212px;">
 				<div class="app-metro-cell" style="width:50%;">
 					<div class="app-metro-cell-inner box box-middlecenter box-vertical bg-1" style="height:208px;">
@@ -101,10 +111,10 @@
 				<div class="app-metro-cell" style="width:50%;padding:0;height:212px;">
 					<div class="app-metro-cell" style="width:100%;">
 						<div class="app-metro-cell-inner bg-2" style="padding:8px;height:118px;">
-							<div class="underline text-left" style="height:32px;line-height:32px;">
+							<div class="text-left" style="height:32px;line-height:32px;border-bottom: 1px solid #fff;">
 								资料1
 							</div>
-							<div class="underline text-left" style="height:32px;line-height:32px;">
+							<div class="text-left" style="height:32px;line-height:32px;border-bottom: 1px solid #fff;">
 								资料2
 							</div>
 							<div style="padding:8px 0;text-align: right;">
@@ -158,7 +168,7 @@
 				<div class="app-metro-cell" style="width:50%">
 					<a class="app-metro-cell-inner bg-10">
 						<span class="app-metro-tip">3</span>
-						<i class="icon icon-chatdot-fill size40"></i>
+						<i class="icon icon-chat-fill size40"></i>
 						<p class="nowrap" style="margin-top:10px;">消息推送</p>
 					</a>
 				</div>

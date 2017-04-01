@@ -2,35 +2,48 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"><meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
     <title>chat</title>
     <link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
-    
+    <style>
+    .input-pre {
+        margin: 5px 3px;
+    }
+    </style>
 </head>
 
 <body ontouchstart="">
         <header>
             <div class="titlebar">
                 <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-                <h1>产品部讨论群</h1>
+                <h1 class="titlebar-title">产品部讨论群</h1>
             </div>
         </header>
         <article style="padding-bottom:47px;">
-            <ul class="chat" id="chat">
+            <ul class="chat" id="ID-Chats">
                 <li>
                     <div class="chat-photo">
-                        <img src="../img/list/photo.png" alt="male">
+                        <div class="photo size40 radiusround">
+                            <i class="icon icon-user-fill"></i>
+                        </div>
                     </div>
                     <div class="chat-content-box">
                         <div class="chat-content">
-                            <i>张三</i>
+                            <span class="chat-content-author">张三</span>
                             <p>Hello!<span data-emoji="[weixiao]"></span></p>
                         </div>
                     </div>
                 </li>
                 <li class="even">
                     <div class="chat-photo">
-                        <img src="../img/list/photo.png" alt="Female">
+                        <div class="photo size40 radiusround">
+                            <i class="icon icon-user-fill"></i>
+                        </div>
                     </div>
                     <div class="chat-content-box">
                         <div class="chat-content">
@@ -42,9 +55,9 @@
         </article>
         <footer>
             <!--底部富文本输入框-->
-            <figure id="richeditor" class="richedit">
+            <figure id="ID-RichInput" class="richedit">
                 <!--轮播-->
-                <div class="slider-container emoji">
+                <div class="slider-container emoji" id="ID-RichInput-slider">
                     <div class="slider-wrapper">
                     <div class="slider-slide">
                         <a data-emoji="[weixiao]" alt="[微笑]"></a>
@@ -151,9 +164,9 @@
                     <div class="slider-pagination"></div>
                 </div>
                 <figcaption>
-                    <div class="input">
-                        <textarea></textarea>
-                        <pre><span></span><br/></pre>
+                    <div class="inputbox basketline">
+                        <textarea class="input-pre"></textarea>
+                        <div class="hline"></div>
                     </div>
                     <a class="button grayscale outline" href="javascript:sent()">发送</a>
                 </figcaption>
@@ -164,22 +177,29 @@
     <!--Exmobi能力-->
     <!--<script src="../scripts/lib/exmobi/exmobi.js"></script>-->
     <script>
-        var r=new Richinput("#richeditor");
-        var richeditor=r.container;
-        var t=new Toast("输入内容不能为空");
+        var slider=null;
+        var richinput=new Richinput("#ID-RichInput",{
+            onActive:function(){
+                if(!slider)slider=new Slider("#ID-RichInput-slider",{
+                    pagination:".slider-pagination"
+                });
+            }
+        });
+        var richContainer=richinput.container;
+        var textarea=document.querySelector("#ID-RichInput textarea");
+        var toast=new Toast("输入内容不能为空");
+        var formControls=new FormControls();
+        var chatContainer=document.getElementById("ID-Chats");
         //发送消息
         function sent(){
-            var chat=document.getElementById("chat");
-            var textarea=document.querySelector("#richeditor textarea");
-
             if(textarea.value==""){
-                t.show();
+                toast.show();
                 return;
             }
-            richeditor.classList.remove("active");
+            richContainer.classList.remove("active");
             var html='<li class="even">'+
                 '<div class="chat-photo">'+
-                    '<img src="../img/list/photo.png" alt="Female">'+
+                    '<div class="photo size40 radiusround"><i class="icon icon-user-fill"></i></div>'+
                 '</div>'+
                 '<div class="chat-content-box">'+
                     '<div class="chat-content">'+
@@ -187,8 +207,7 @@
                     '</div>'+
                 '</div>'+
             '</li>';
-            chat.innerHTML+=html;
-            //$(chat).append(html);
+            chatContainer.innerHTML+=html;
             textarea.value="";
             scrollToBottom();
         }

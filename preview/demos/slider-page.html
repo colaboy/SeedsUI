@@ -3,18 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
     <title>slider-page</title>
     <link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
 </head>
 
 <body ontouchstart="">
-        <header>
+    <header>
         <div class="titlebar">
             <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-            <h1>滑动页面</h1>
+            <h1 class="titlebar-title">滑动页面</h1>
         </div>
-        <ul class="tabbar" data-type="slide" data-col="5" id="ID-Tabbar">
+        <ul class="tabbar tabbar-line animated" data-col="5" id="ID-Tabbar">
             <li class="tab active">
                 <label class="tab-label">头条</label>
             </li>
@@ -32,8 +36,8 @@
             </li>
         </ul>
     </header>
-    <article style="padding-top:84px;" class="scrollbox">
-        <div class="slider-container" id="ID-CarouselPage" style="height: 100%;">
+    <article style="padding-top:84px">
+        <div class="slider-container" id="ID-Pages" style="height: 300px;">
         <div class="slider-wrapper">
         <div class="slider-slide">
             <!--第一页:start-->
@@ -87,85 +91,89 @@
               Model
               ===========================*/
             initialize:function(){
-                /*DOM*/
-                this.slides=document.querySelectorAll("#ID-CarouselPage .slider-slide");
-                this.tabbar=document.getElementById("ID-Tabbar");
-                this.tabs=this.tabbar.querySelectorAll(".tab");
-
-                /*Plugin*/
-                this.carouselPage={};
-
-                /*Data*/
-
-                /*Render*/
-                this.render();
-                
-                /*Events*/
-                this._attach();
+                this.render();//使用backbone时，此行无用
             },
             render:function(){
-                this._initPlugin();
+                var self = this;
+                //渲染页面
+                this.slides=document.querySelectorAll("#ID-Pages > .slider-wrapper > .slider-slide");
+                this.sliderContainer=document.getElementById("ID-Pages");
+                this.sliderContainer.style.height=(window.innerHeight-84)+"px";
+
+                this.tabbarContainer=document.getElementById("ID-Tabbar");
+                this.tabs=this.tabbarContainer.querySelectorAll(".tab");
+
+                this.slider=this._initSlider();
+
+                //加载数据
+                this.loadData();
+            },
+            refresh:function(){
+                console.log("刷新");
+            },
+            destroy:function(){
+                console.log("移除");
+            },
+            loadData:function(){
+                var self=this;
+                var pageDataCount=[100,10,30,40,50];//每页数据条数
+                [].slice.call(self.slides).forEach(function(n,i,a){
+                    var datastr="";
+                    for(var j=0;j<pageDataCount[i];j++){
+                        datastr+='<li class="li underline" style="padding:12px 10px;"><p>第'+i+'页</p></li>'
+                    }
+                    n.innerHTML='<ul class="list">'+datastr+'</ul>';
+                })
+
+                this._attach();//使用backbone时，此行无用
             },
             /*=========================
               Method
               ===========================*/
+            _eachBreak:function(arr,fn){
+                for(var i=0;i<arr.length;i++){
+                    if(fn(arr[i],i)==false)break;
+                }
+            },
             _tabActive:function(index){
                 for(var i=0,t;t=this.tabs[i++];){
                     t.classList.remove("active");
                 }
                 this.tabs[index].classList.add("active");
             },
-            /*=========================
-              Plugin
-              ===========================*/
-            _initData:function(){
-                var self=this;
-                var pageDataCount=[100,10,30,40,50];//每页数据条数
-                [].slice.call(self.slides).forEach(function(n,i,a){
-                    var datastr="";
-                    for(var j=0;j<pageDataCount[i];j++){
-                        datastr+='<li class="padding8 underline"><p>第'+i+'页</p></li>'
-                    }
-                    n.innerHTML='<ul class="list">'+datastr+'</ul>';
-                })
-            },
-            _initTabbar:function(){
-                var self=this;
-                for(var i=0,t;t=this.tabs[i++];){
-                    (function(i){
-                        t.addEventListener("click",function(){
-                            self.carouselPage.slideTo(i-1);
-                            self._tabActive(i-1);
-                        },false);
-                    })(i);
-                }
-            },
             _initSlider:function(){
                 var self=this;
-                this.carouselPage=new Slider("#ID-CarouselPage",{
-                    "onInit":function(e){
-                        //compatibleIosScroll(e);
-                    },
-                    "onSlideChangeEnd":function(e){
-                        self._tabActive(e.index);
-                        //compatibleIosScroll(e);
+                return new Slider("#ID-Pages",{
+                    onSlideChangeEnd:function(e){
+                        self._tabActive(e.activeIndex);
                     }
                 });
-            },
-            _initPlugin:function(){
-                this._initData();
-                this._initSlider();
-                this._initTabbar();
             },
             /*=========================
               Events
               ===========================*/
             _attach:function(e){
                 var self=this;
+                for(var i=0,t;t=this.tabs[i++];){
+                    t.addEventListener("click",function(e){
+                        self._onClickTab(e);
+                    },false);
+                }
             },
             /*=========================
               Event Handler
               ===========================*/
+            _onClickTab:function(e){
+                var index=0;
+                this._eachBreak(this.tabs,function(n,i){
+                    if(n==e.target){
+                        index=i;
+                        return false;
+                    }
+                });
+                this._tabActive(index);
+                this.slider.slideTo(index);
+            }
         }
 
         window.addEventListener("load",function(){

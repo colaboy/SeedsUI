@@ -3,7 +3,11 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
 	<title>scrollpicker-date</title>
 	<link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
 </head>
@@ -14,18 +18,23 @@
 	        <a class="titlebar-button" href="javascript:back()">
 	            <i class="icon icon-arrowleft"></i>
 	        </a>
-	        <h1>日期选择器</h1>
+	        <h1 class="titlebar-title">日期时间</h1>
 	    </div>
 	</header>
 	<article>
-        <div class="inputbox margin8">
-            <input type="text" class="input-text text-center SID-DateTime" placeholder="请选择日期时间" readonly="readonly"/>
-        </div>
-        <div class="inputbox margin8">
-            <input type="text" class="input-text text-center SID-Date" placeholder="请选择日期" readonly="readonly"/>
-        </div>
-        <div class="inputbox margin8">
-            <input type="text" class="input-text text-center SID-Time" placeholder="请选择时间" readonly="readonly"/>
+        <div class="group" style="padding: 0 12px;">
+            <div class="inputbox underline">
+                <input type="text" class="input-text SID-DateTime" placeholder="请选择日期时间" readonly="readonly"/>
+                <i class="color-placeholder icon icon-calendar"></i>
+            </div>
+            <div class="inputbox underline">
+                <input type="text" class="input-text SID-Date" placeholder="请选择日期" readonly="readonly"/>
+                <i class="color-placeholder icon icon-calendar"></i>
+            </div>
+            <div class="inputbox underline">
+                <input type="text" class="input-text SID-Time" placeholder="请选择时间" readonly="readonly"/>
+                <i class="color-placeholder icon icon-time"></i>
+            </div>
         </div>
 	</article>
 	<!--SeedsUI-->
@@ -63,7 +72,6 @@
             this._attach();
         },
         render:function(){
-            this._initPlugin();
         },
         /*=========================
           Plugin
@@ -77,13 +85,13 @@
                 dayClass:"text-center",
                 onClickDone:function(e){
                     self.textDate.value=e.activeText;
-                    e.hide();
+                    e.scrollpicker.hide();
                 },
                 onShowed:function(e){
                     //e.setIsClickMaskHide(true);
                 },
                 onHid:function(e){
-                    e.destroy();
+                    e.scrollpicker.destroy();
                 }
             });
             if(defaultYMD && defaultYMD.length>0){
@@ -101,13 +109,13 @@
                 minuteClass:"text-center",
                 onClickDone:function(e){
                     self.textTime.value=e.activeText;
-                    e.hide();
+                    e.scrollpicker.hide();
                 },
                 onShowed:function(e){
                     //e.setIsClickMaskHide(true);
                 },
                 onHid:function(e){
-                    e.destroy();
+                    e.scrollpicker.destroy();
                 }
             });
             if(defaultHS && defaultHS.length>0){
@@ -131,13 +139,13 @@
                 minutesData:self.minutesData,
                 onClickDone:function(e){
                     self.textDateTime.value=e.activeText;
-                    e.hide();
+                    e.scrollpicker.hide();
                 },
                 onShowed:function(e){
                     //e.setIsClickMaskHide(true);
                 },
                 onHid:function(e){
-                    e.destroy();
+                    e.scrollpicker.destroy();
                 }
             });
             if(defaults && defaults.length>0){
@@ -148,9 +156,6 @@
                 this.spDateTime.setDefaultMinute(defaults[4]);
                 this.spDateTime.update();
             }
-        },
-        _initPlugin:function(){
-
         },
         /*=========================
           Events
@@ -178,9 +183,8 @@
             }
             this._newSpDate(defaultYMD);
             setTimeout(function(){
-                self.spDate.show();
+                self.spDate.scrollpicker.show();
             },10);
-            //self.spDate.show();
         },
         _onClickTextTime:function(e){
             var self=this;
@@ -189,9 +193,8 @@
                 defaultHS=this.textTime.value.split(":");
             }
             this._newSpTime(defaultHS);
-            //this.spTime.show();
             setTimeout(function(){
-                self.spTime.show();
+                self.spTime.scrollpicker.show();;
             },10);
         },
         _onClickTextDateTime:function(e){

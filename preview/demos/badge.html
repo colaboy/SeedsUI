@@ -3,25 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
     <title>badge</title>
     <link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
-    <style type="text/css">
-    /*sticker自定义样式*/
-    .app-iconsticker.top{
-        border-top-width: 28px;
-    }
-    .app-iconsticker.top span {
-        margin-top: -26px;
-    }
-    .app-iconsticker.left{
-        border-right-width: 28px;
-    }
-    .app-iconsticker.right{
-        border-left-width: 28px;
-    }
-    .app-iconsticker.bottom{
-        border-bottom-width: 28px;
+    <style>
+    .peg-content{
+        text-align:center;padding: 10px 12px;
     }
     </style>
 </head>
@@ -30,18 +21,78 @@
     <header>
         <div class="titlebar">
             <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-            <h1>徽章</h1>
+            <h1 class="titlebar-title">徽章</h1>
         </div>
     </header>
     <article>
-        <p class="sliver">badge | tip | dot | close | sticker</p>
-        <div class="card bordered padding8">
-            <span class="badge">badge</span>
-            <span class="tip">tip</span>
-            <span class="dot"></span>
-            <span class="close"><i class="icon icon-close"></i></span>
-            <span class="app-iconsticker sticker top left"><span class="size12 icon-fav-fill"></span></span>
-            <span class="sticker top right"><span>NEW</span></span>
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">badge</p>
+            </div>
+            <div class="peg-content">
+                <span class="badge">badge</span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">tip</p>
+            </div>
+            <div class="peg-content">
+                <span class="tip">tip</span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">dot</p>
+            </div>
+            <div class="peg-content">
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">close</p>
+            </div>
+            <div class="peg-content">
+                <span class="close"><i class="icon icon-close-fill"></i></span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">peg</p>
+            </div>
+            <div class="peg-content">
+                <span class="peg"></span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">sticker</p>
+            </div>
+            <div style="position:relative;height:50px;line-height: 50px;">
+                <span class="sticker sticker-icon top right"><span class="size12 icon-fav-fill"></span></span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="sliver underline">
+                <span class="peg"></span>
+                <p class="sliver-title">tagline</p>
+            </div>
+            <div style="position:relative;padding: 8px;overflow:hidden;height: 100px;">
+                <span class="tagline top right"><span>tagline</span></span>
+            </div>
         </div>
     </article>
     <script src="../scripts/lib/seedsui/seedsui.min.js"></script>

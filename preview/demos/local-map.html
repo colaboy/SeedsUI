@@ -3,7 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
 	<title>local-map</title>
 	<link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
 	<style type="text/css">
@@ -64,18 +68,18 @@
 		<header>
 		    <div class="titlebar">
 		        <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-		        <h1>签到地图</h1>
+		        <h1 class="titlebar-title">签到地图</h1>
 		    </div>
 		</header>
-		<article class="scrollbox" style="padding-bottom:150px;">
+		<article class="article-absolute" style="bottom:150px;">
 			<div class="inputbox reverse radius20 signDate" style="height:32px;">
 				<input type="date" class="input-text" id="expireDate" style="padding-top:0;padding-bottom:0;    background-color: transparent;">
 				<i class="icon icon-calendar"></i>
 			</div>
-			<div id="allmap" class="height-full"></div>
+			<div id="allmap" style="height: 100%;"></div>
 		</article>
 		<footer style="height: 150px;background-color:white;">
-			<div class="box padding8">
+			<div class="box" style="padding:8px;">
 				<div class="box-flex-1">最新签到<b>1</b>人（已签<b>1</b>人，未签<b>2</b>人）</div>
 				<div><a>详细></a></div>
 			</div>

@@ -3,69 +3,106 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon.png">
     <title>form-validate</title>
     <link rel="stylesheet" href="../scripts/lib/seedsui/seedsui.min.css">
-    <style type="text/css">
-    .app-active-error {
-        background-color: #ffecec;
-    }
-    .icon-eye-fill.active{
-        color: #18b2ed;
-    }
-    </style>
 </head>
 
 <body ontouchstart="">
     <header>
         <div class="titlebar">
             <a class="titlebar-button" href="javascript:back()"><i class="icon icon-arrowleft"></i></a>
-            <h1>表单验证</h1>
+            <h1 class="titlebar-title">表单验证</h1>
         </div>
     </header>
     <article>
-    	<form id="ID-Form" style="padding:10px;">
-            <div class="inputbox bordered tbmargin8" data-input="clear">
-                <input type="text" class="input-text" placeholder="用户名" name="username" maxlength="16" data-rule-field="用户名" data-rule="required username"/>
-                <i class="icon icon-clear-fill color-placeholder hide"></i>
-            </div>
-            <div class="inputbox bordered tbmargin8" data-input="reveal">
-                <input type="password" class="input-text" placeholder="密码" name="password" id="password" maxlength="16" data-rule-field="密码" data-rule="required safelvl password minlength:6 maxlength:16"/>
-                <i class="icon icon-eye-fill color-placeholder"></i>
-                <div class="safelvl lvl0">
-                    <div class="progress"></div>
-                	<ul>
-                		<li>弱</li>
-                		<li>中</li>
-                		<li>强</li>
-                	</ul>
+    	<form id="ID-Form" method="post">
+            <div class="group" style="padding:0 12px;">
+                <div class="inputbox underline">
+                    <label class="inputbox-left">用户</label>
+                    <div class="inputbox-right inputbox" data-input="clear">
+                        <input type="text" class="input-text" name="NID-UserName" maxlength="16"/>
+                        <i class="icon icon-rdoclose-fill color-placeholder hide"></i>
+                    </div>
+                </div>
+                <div class="inputbox">
+                    <label class="inputbox-left">密码</label>
+                    <div class="inputbox-right inputbox" data-input="reveal">
+                        <input type="password" class="input-text" name="NID-Pwd" maxlength="16"/>
+                        <i class="icon icon-eye-fill color-placeholder"></i>
+                    </div>
+                    <ul class="safelvl lvl0">
+                        <li>
+                            <div class="safelvl-progress"></div>
+                            <span class="safelvl-font">弱</span>
+                        </li>
+                        <li>
+                            <div class="safelvl-progress"></div>
+                            <span class="safelvl-font">中</span>
+                        </li>
+                        <li>
+                            <div class="safelvl-progress"></div>
+                            <span class="safelvl-font">强</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div style="height:40px;"></div>
+                <hr/>
+
+                <div class="inputbox underline">
+                    <label class="inputbox-left">确认</label>
+                    <div class="inputbox-right inputbox" data-input="reveal">
+                        <input type="password" name="NID-RePwd" class="input-text"/>
+                        <i class="icon icon-eye-fill color-placeholder"></i>
+                    </div>
+                </div>
+
+                <div class="inputbox underline">
+                    <label class="inputbox-left">手机</label>
+                    <div class="inputbox-right inputbox">
+                        <input type="tel" name="NID-Phone" class="input-text" oninput="if(isNaN(value))value=value.substring(0,value.length-1)"/>
+                    </div>
+                </div>
+
+                <div class="inputbox underline">
+                    <label class="inputbox-left">姓名</label>
+                    <div class="inputbox-right inputbox">
+                        <input type="text" name="NID-Name" class="input-text"/>
+                    </div>
+                </div>
+
+                <div class="inputbox underline">
+                    <label class="inputbox-left">性别</label>
+                    <div class="inputbox-right inputbox">
+                        <select class="input-text" name="NID-Sex">
+                            <option value="male">男</option>
+                            <option value="female">女 </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inputbox underline">
+                    <label class="inputbox-left">邮箱</label>
+                    <div class="inputbox-right inputbox">
+                        <input type="text" name="NID-Mail" class="input-text"/>
+                    </div>
+                </div>
+
+                <div class="inputbox">
+                    <label class="inputbox-left">年龄</label>
+                    <div class="inputbox-right inputbox">
+                        <input type="number" name="NID-Age" class="input-text"/>
+                    </div>
                 </div>
             </div>
-            
-            <div style="height:22px;"></div>
-
-            <div class="inputbox bordered tbmargin8" data-input="reveal">
-                <input type="password" class="input-text" placeholder="确认" name="repassword" data-rule-field="密码" data-rule="required password compare:password minlength:6 maxlength:16"/>
-                <i class="icon icon-eye-fill color-placeholder"></i>
+            <div style="margin:0 12px;">
+                <input type="submit" class="button submit block" style="width: 100%;" value="注册"/>
             </div>
-
-            <div class="inputbox bordered tbmargin8">
-                <input type="text" class="input-text" placeholder="手机号码" name="phone" data-rule-field="手机号码" data-rule="phone"/>
-            </div>
-
-            <div class="inputbox bordered tbmargin8">
-                <input type="text" class="input-text" placeholder="中文姓名" name="mail" data-rule-field="姓名" data-rule="chinese"/>
-            </div>
-
-            <div class="inputbox bordered tbmargin8">
-                <input type="text" class="input-text" placeholder="邮箱" name="mail" data-rule-field="邮箱" data-rule="mail"/>
-            </div>
-
-            <div class="inputbox bordered tbmargin8">
-                <input type="number" class="input-text" placeholder="年龄" name="age" data-rule-field="年龄" data-rule="number minnumber:18 maxnumber:48"/>
-            </div>
-
-            <a class="button submit block">注册</a>
     	</form>
     </article>
     
@@ -77,76 +114,155 @@
             /*=========================
               Model
               ===========================*/
-            initialize:function(){
-                //DOM
-                //Data
-                //Plugin
-                this.form,this.formId="ID-Form";
-                this.formControls;
+            render:function(){
+                var self = this;
+                this.validator={};
+                //渲染页面
+                this.formContainer=document.getElementById("ID-Form");
+
+                this.toast=new Toast();
+                this.formControls=new FormControls();;
+                //加载数据
+                this.loadData();
+            },
+            refresh:function(){
+                console.log("刷新");
+            },
+            destroy:function(){
+                console.log("移除");
+            },
+            loadData:function(){
+
+                this._attach();//使用backbone时，此行无用
             },
             /*=========================
               Method
               ===========================*/
-            _initFormControls:function(){
-                this.formControls=new Formcontrols();
-            },
-            _initForm:function(){
-                var self=this;
-                this.form=new Form("#"+this.formId,{
-                    "toastParent":"article",
-                    "formFilterClass":"form-filter",
-                    "onFail":function(e){
-                        for(var i=0,el;el=e.formElements[i++];){
-                            el.parentNode.classList.remove("app-active-error");
-                        }
-                        e.field.parentNode.classList.add("app-active-error");
-                        e.toast.show();
-                    },
-                    "onSuccess":function(e){
-                        for(var i=0,el;el=e.formElements[i++];){
-                            el.parentNode.classList.remove("app-active-error");
-                        }
-                        console.log("提交");
+            _validateForm:function(){
+                var validator=new Validator();
+                validator.add(this.formContainer["NID-UserName"],[
+                    {
+                        rule:'minLength:6',
+                        errorMsg:'用户名不能低于6位'
+                    },{
+                        rule:'username',
+                        errorMsg:'用户名必须为字母数字或者下划线'
                     }
-                });
-                this.form.container.addEventListener("submit",function(e){
-                    e.preventDefault();
-                    self.form.validate();
-                },false);
+                ]);
+                validator.add(this.formContainer["NID-Pwd"],[
+                    {
+                        rule:'minLength:6',
+                        errorMsg:'密码不能低于6位'
+                    },{
+                        rule:'maxLength:16',
+                        errorMsg:'密码不能超过16位'
+                    },{
+                        rule:'password',
+                        errorMsg:'密码格式不正确'
+                    },{
+                        rule:'safeLvl:3',
+                        errorMsg:'密码强度不够'
+                    }
+                ]);
+                validator.add(this.formContainer["NID-RePwd"],[
+                    {
+                        rule:'minLength:6',
+                        errorMsg:'密码不能低于6位'
+                    },{
+                        rule:'maxLength:16',
+                        errorMsg:'密码不能超过16位'
+                    },{
+                        rule:'password',
+                        errorMsg:'密码格式不正确'
+                    },{
+                        rule:'compare:'+this.formContainer["NID-Pwd"].value,
+                        errorMsg:'两次密码输入不一致'
+                    }
+                ]);
+                validator.add(this.formContainer["NID-Phone"],[
+                    {
+                        rule:'phone',
+                        errorMsg:'手机号码不正确'
+                    }
+                ]);
+                validator.add(this.formContainer["NID-Name"],[
+                    {
+                        rule:'chinese',
+                        errorMsg:'姓名请输入中文'
+                    }
+                ]);
+                validator.add(this.formContainer["NID-Mail"],[
+                    {
+                        rule:'mail',
+                        errorMsg:'邮箱格式不正确'
+                    }
+                ]);
+                validator.add(this.formContainer["NID-Age"],[
+                    {
+                        rule:'negativeInteger',
+                        errorMsg:'年龄只能为正整数'
+                    },{
+                        rule:'minNumber:1',
+                        errorMsg:'年龄最小1岁'
+                    },{
+                        rule:'maxNumber:48',
+                        errorMsg:'年龄最大48岁'
+                    }
+                ]);
+                var error=validator.start();
+                return error;
             },
-            _initPlugin:function(){
-                this._initFormControls();
-                this._initForm();
+            _update:function(){
             },
+            /*=========================
+              Plugin
+              ===========================*/
             /*=========================
               Events
               ===========================*/
             _attach:function(e){
                 var self=this;
+                this.formContainer.addEventListener("submit",function(e){
+                    self._onSubmit(e);
+                },false);
+            },
+            _showError:function(form,msg){
+                var self=this;
+                form.fields.forEach(function(n){
+                    n.blur();
+                });
+                setTimeout(function(){
+                    self.toast.setText(msg);
+                    self.toast.show();
+                }, 200);
             },
             /*=========================
               Event Handler
               ===========================*/
-            /*=========================
-              OnLoad
-              ===========================*/
-            _onLoad:function(){
-                var self=this;
-                //DOM
+            _onSubmit:function(e){
+                e.preventDefault();
+                //获取表单
+                this.form=new Form(this.formContainer);
 
-                //Plugin
-                this._initPlugin();
-                //Events
-                this._attach();
+                //重置错误样式
+                for(var i=0,el;el=this.form.fields[i++];){
+                    el.parentNode.parentNode.classList.remove("inputbox-error");
+                }
+                
+                //表单验证
+                var error=view._validateForm();
+                if(error){
+                    this._showError(this.form,error.msg);
+                    error.field.parentNode.parentNode.classList.add("inputbox-error");
+                    return;
+                }
+                var formArr=this.form.serializeJson();
+                console.log(formArr);
             }
         }
 
         window.addEventListener("load",function(){
-            view._onLoad();
-        }, false);
-
-        document.addEventListener("DOMContentLoaded",function(){
-            view.initialize();
+            view.render();
         }, false);
         //定义exmobi返回
         function back(){history.go(-1);}
